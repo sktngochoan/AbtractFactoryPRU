@@ -11,12 +11,7 @@ public abstract class Turret : MonoBehaviour
         AutoTurret,
         MiniTurret
     }
-
     public abstract TurretType GetTurretType();
-
-    // If a vehicle is not on a container ship, and if a vehicle is not yet waiting at the beach, (pickup location)
-    // we let it move towards the beach (pickup location). Once it has reached the pickup location, we move the vehicle
-    // onto the container ship
     void Update()
     {
         transform.Translate(Vector3.right * (BulletSpeed * Time.deltaTime));
