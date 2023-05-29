@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 9137012250415969978}
   - component: {fileID: 1561170608}
   - component: {fileID: -2480532175450822418}
-  - component: {fileID: -7746652082390581929}
   - component: {fileID: -3661644841646318481}
   m_Layer: 0
   m_Name: MiniExplosiveBullet
@@ -100,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad90c7c3dca66984c92439b73a188228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerShip: {fileID: 5841016028772771788, guid: 67f5f66f22a99024988e94c6f80295e8, type: 3}
 --- !u!58 &-2480532175450822418
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -117,18 +115,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-7746652082390581929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9137012250415969979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d22ccea33fa38d49901415d71d97787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &-3661644841646318481
 Rigidbody2D:
   serializedVersion: 4

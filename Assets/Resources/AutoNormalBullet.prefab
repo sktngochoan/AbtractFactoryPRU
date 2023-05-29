@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7968306675727258381}
   - component: {fileID: 7968306675727258369}
   - component: {fileID: 7968306675727258368}
-  - component: {fileID: 7968306675727258371}
   - component: {fileID: 1151665742743591240}
   m_Layer: 0
   m_Name: AutoNormalBullet
@@ -125,18 +124,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7968306675727258371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7968306675727258380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d22ccea33fa38d49901415d71d97787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1151665742743591240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,4 +136,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852d0b3223dccf3478198eb4d4220895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerShip: {fileID: 0}

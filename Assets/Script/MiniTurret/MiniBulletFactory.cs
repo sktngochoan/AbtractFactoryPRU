@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public class MiniTurretFactory : TurretFactory
+public class MiniBulletFactory : BulletFactory
 {
     private const string slowBullet = "MiniNormalBullet";
     private const string fastBullet = "MiniExplosiveBullet";
 
     public override void CreateSlowBullet()
     {
-        var factoryTransformPosition = factoryBuildingTransform.transform.position;
+        var factoryTransformPosition = TurretTransform.transform.position;
         var slowBulletObject = Resources.Load(slowBullet) as GameObject;
         if (slowBulletObject != null)
         {
@@ -24,7 +24,7 @@ public class MiniTurretFactory : TurretFactory
 
     public override void CreateFastBullet()
     {
-        var factoryTransformPosition = factoryBuildingTransform.transform.position;
+        var factoryTransformPosition = TurretTransform.transform.position;
         var fastBulletObject = Resources.Load(fastBullet) as GameObject;
         if (fastBulletObject != null)
         {

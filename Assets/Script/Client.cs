@@ -9,54 +9,41 @@ public class Client : MonoBehaviour
     private const string MiniTurret = "MiniTurret";
     private const string AutoTurret = "AutoTurret";
 
-    // The client class keeps references to the factory building transforms. We do this to be able to keep the same
-    // object/building in the scene but change the underlying vehicle factory implementation on-the-fly
-    // Each time we instantiate a new vehicle factory, the corresponding factory building transform reference
-    // needs to be assigned.
     private readonly Transform[] _factoryBuildings = new Transform[MaxNumberOfFactoryBuildings];
-
-    // We also keep references to all container ships as the vehicle factory needs to know where to send the newly
-    // produced vehicles. Each time we instantiate a new vehicle factory, the corresponding container ship reference
-    // needs to be assigned.
-    private readonly Transform[] _containerShips = new Transform[MaxNumberOfFactoryBuildings];
 
     public TMP_Dropdown buildingDropdown;
     public TMP_Dropdown factoryTypeDropdown;
     public GameObject FacA;
     public GameObject FacB;
     public GameObject FacC;
-    public GameObject Turret;
     private void Start()
     {
-        InvokeRepeating(nameof(ProduceVehicles), 5, 3);
+        InvokeRepeating(nameof(CreateBullet), 3, 2);
     }
 
-    public void ProduceVehicles()
+    public void CreateBullet()
     {
         for (var i = 0; i < MaxNumberOfFactoryBuildings; i++)
         {
             // Skip if the no turret
-            if (_factoryBuildings[i] == null || _factoryBuildings[i].GetComponent<TurretFactory>() == null) continue;
+            if (_factoryBuildings[i] == null || _factoryBuildings[i].GetComponent<BulletFactory>() == null) continue;
 
             // Create random bullet
             if (Random.Range(0, 2) == 0)
             {
-                _factoryBuildings[i].GetComponent<TurretFactory>().CreateFastBullet();
+                _factoryBuildings[i].GetComponent<BulletFactory>().CreateFastBullet();
             }
             else
             {
-                _factoryBuildings[i].GetComponent<TurretFactory>().CreateSlowBullet();
+                _factoryBuildings[i].GetComponent<BulletFactory>().CreateSlowBullet();
             }
         }
     }
 
-    // This method is called whenever the "Assign" button is clicked in the user interface.
-    // The method checks which building is selected and which factory implementation is needed.
-    // If a building already exists, the existing building transform is reused. Otherwise it is created.
-    // The same goes for the container ship
+    // Trigger when user click button
     public void AssignFactoryToBuilding()
     {
-        Transform factoryBuildingTransform = null;
+        Transform turretTransform = null;
         int typeOfTurret = 0;
         switch (factoryTypeDropdown.captionText.text)
         {
@@ -70,19 +57,19 @@ public class Client : MonoBehaviour
         switch (buildingDropdown.captionText.text)
         {
             case "Position A":
-                CreateFactoryBuildingAndShip(0,typeOfTurret, FacA, out factoryBuildingTransform);
+                CreateFactory(0,typeOfTurret, FacA, out turretTransform);
                 break;
 
             case "Position B":
-                CreateFactoryBuildingAndShip(1, typeOfTurret, FacB, out factoryBuildingTransform);
+                CreateFactory(1, typeOfTurret, FacB, out turretTransform);
                 break;
 
             case "Position C":
-                CreateFactoryBuildingAndShip(2, typeOfTurret, FacC, out factoryBuildingTransform);
+                CreateFactory(2, typeOfTurret, FacC, out turretTransform);
                 break;
         }
 
-        if (factoryBuildingTransform == null)
+        if (turretTransform == null)
         {
             Debug.Log("Could not initialize or load factory transform");
             return;
@@ -92,27 +79,27 @@ public class Client : MonoBehaviour
         // This is necessary as the transform might otherwise access the factory implementation (script) while we are trying to 
         // change it which would cause all sorts of issues...
 
-        factoryBuildingTransform.gameObject.SetActive(false);
+        turretTransform.gameObject.SetActive(false);
 
         // Out of laziness, we simply destroy any existing / attached vehicle factory implementation even if the same one is assigned again :-)
-        TurretFactory vehicleFactory = factoryBuildingTransform.gameObject.GetComponent<TurretFactory>();
-        Destroy(vehicleFactory);
+        BulletFactory bulletFactory = turretTransform.gameObject.GetComponent<BulletFactory>();
+        Destroy(bulletFactory);
 
         // Depending on the selected vehicle factory implementation type, we then assign a new vehicle factory implementation (script) to the transform
         switch (factoryTypeDropdown.captionText.text)
         {
             case "Mini Turret":
-                MiniTurretFactory miniTurretFactory = factoryBuildingTransform.gameObject.AddComponent<MiniTurretFactory>();
-                miniTurretFactory.factoryBuildingTransform = factoryBuildingTransform;
+                MiniBulletFactory miniTurretFactory = turretTransform.gameObject.AddComponent<MiniBulletFactory>();
+                miniTurretFactory.TurretTransform = turretTransform;
                 break;
             case "Auto Turret":
-                AutoTurretFactory autoTurretFactory = factoryBuildingTransform.gameObject.AddComponent<AutoTurretFactory>();
-                autoTurretFactory.factoryBuildingTransform = factoryBuildingTransform;
+                AutoBulletFactory autoTurretFactory = turretTransform.gameObject.AddComponent<AutoBulletFactory>();
+                autoTurretFactory.TurretTransform = turretTransform;
                 break;
         }
 
         // Finally we reactivate the transform and let the newly attached vehicle factory implementation do its magic...
-        factoryBuildingTransform.gameObject.SetActive(true);
+        turretTransform.gameObject.SetActive(true);
     }
 
     private Transform CreateFactoryBuilding(GameObject Fac,int typeOfTurret)
@@ -128,11 +115,11 @@ public class Client : MonoBehaviour
         return newFactory;
     }
 
-    private void CreateFactoryBuildingAndShip(int arrayPosition,int typeOfTurret, GameObject Fac, out Transform factoryBuildingTransform)
+    private void CreateFactory(int arrayPosition,int typeOfTurret, GameObject Fac, out Transform factoryBuildingTransform)
     {
         if (_factoryBuildings[arrayPosition] == null)
         {
-            // Create transforms for factory building and ship
+            // Create transforms for factory building
             _factoryBuildings[arrayPosition] = CreateFactoryBuilding(Fac,typeOfTurret);
             factoryBuildingTransform = _factoryBuildings[arrayPosition];
         }

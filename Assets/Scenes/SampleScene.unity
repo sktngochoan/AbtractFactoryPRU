@@ -490,7 +490,6 @@ MonoBehaviour:
   FacA: {fileID: 1857960156}
   FacB: {fileID: 1555072100}
   FacC: {fileID: 22517265}
-  Turret: {fileID: 6436015137548248984, guid: 5de2be804d2fc644c9d04c2c064f7767, type: 3}
 --- !u!1 &333572081
 GameObject:
   m_ObjectHideFlags: 0

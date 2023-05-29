@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalAutoTurret : AutoTurret
+public class ExplosiveMiniTurret : MiniBullet
 {
     private void Start()
     {
-        BulletSpeed = 6;
+        BulletSpeed = 8;
+        BulletDame = 7;
     }
 }
