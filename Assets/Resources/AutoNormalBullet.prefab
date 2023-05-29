@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1151665742743591240}
   m_Layer: 0
   m_Name: AutoNormalBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,3 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852d0b3223dccf3478198eb4d4220895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BulletSpeed: 0
+  BulletDame: 0

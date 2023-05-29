@@ -5,8 +5,8 @@ using UnityEngine;
 public abstract class Bullet : MonoBehaviour
 {
     // Each vehicle implementation specifies its own movement speed
-    protected float BulletSpeed = 0f;
-    protected float BulletDame = 0f;
+    public float BulletSpeed = 0f;
+    public float BulletDame = 0f;
     public enum BulletType
     {
         AutoBullet,

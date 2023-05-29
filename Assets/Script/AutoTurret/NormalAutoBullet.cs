@@ -8,5 +8,6 @@ public class NormalAutoBullet : AutoBullet
     {
         BulletSpeed = 6;
         BulletDame = 10;
+        slow = 5f;
     }
 }

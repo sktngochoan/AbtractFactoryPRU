@@ -8,5 +8,6 @@ public class ExplosiveAutoBullet : AutoBullet
     {
         BulletSpeed = 10;
         BulletDame = 20;
+        slow = 7f;
     }
 }

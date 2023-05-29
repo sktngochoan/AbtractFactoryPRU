@@ -74,18 +74,10 @@ public class Client : MonoBehaviour
             Debug.Log("Could not initialize or load factory transform");
             return;
         }
-
-        // Before attaching a new vehicle factory implementation (script) to the factory building, we need to deactivate the transform
-        // This is necessary as the transform might otherwise access the factory implementation (script) while we are trying to 
-        // change it which would cause all sorts of issues...
-
-        turretTransform.gameObject.SetActive(false);
-
-        // Out of laziness, we simply destroy any existing / attached vehicle factory implementation even if the same one is assigned again :-)
+        
         BulletFactory bulletFactory = turretTransform.gameObject.GetComponent<BulletFactory>();
         Destroy(bulletFactory);
 
-        // Depending on the selected vehicle factory implementation type, we then assign a new vehicle factory implementation (script) to the transform
         switch (factoryTypeDropdown.captionText.text)
         {
             case "Mini Turret":
@@ -97,9 +89,7 @@ public class Client : MonoBehaviour
                 autoTurretFactory.TurretTransform = turretTransform;
                 break;
         }
-
-        // Finally we reactivate the transform and let the newly attached vehicle factory implementation do its magic...
-        turretTransform.gameObject.SetActive(true);
+       
     }
 
     private Transform CreateFactoryBuilding(GameObject Fac,int typeOfTurret)
